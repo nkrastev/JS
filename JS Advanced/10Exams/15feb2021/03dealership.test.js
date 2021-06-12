@@ -15,6 +15,18 @@ describe("Tests Global", function() {
         });
      });
 
-     
+     describe("carEquipment", function() {
+        it("Zero wanted extras returns empty array", function() {               
+            expect(dealership.carEquipment(['tyres', 'horn', 'windows'],[])).to.have.same.members([]);
+        });
+        it("Tyres wanted extras", function() {               
+            expect(dealership.carEquipment(['tyres', 'horn', 'windows'],[0])).to.have.same.members(['tyres']);
+        });
+        it("All extras wanted", function() {               
+            expect(dealership.carEquipment(['tyres', 'horn', 'windows'],[0,1,2])).to.have.same.members(['tyres', 'horn', 'windows']);
+        });
+        
+     });
+
      
 });
