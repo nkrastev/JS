@@ -28,5 +28,21 @@ describe("Tests Global", function() {
         
      });
 
-     
+     describe("euroCategory", function() {
+        it("Low categ, no discount", function() {     
+            assert.equal(dealership.euroCategory(2),'Your euro category is low, so there is no discount from the final price!');                      
+        });
+
+        it("5 categ, discount 5%", function() { 
+            //method gets Audi B8? always? 
+            //discount 15000 for old car total remains 15000 - 5% for category = 14250         
+            //useless test!
+            assert.equal(dealership.euroCategory(5),`We have added 5% discount to the final price: 14250.`);                      
+        });  
+        
+        it("4 categ, discount 5%", function() {             
+            //again useless test??? 
+            assert.equal(dealership.euroCategory(4),`We have added 5% discount to the final price: 14250.`);                      
+        });  
+     });     
 });
