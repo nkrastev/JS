@@ -1,19 +1,17 @@
 class Bank {
+    
     constructor(bankName){
+           
         this._bankName=bankName;
         this.allCustomers=[];
+        
     }
 
-    get bankName(){
-        return this._bankName;
-    }
-    set bankName(value){
-        //todo validate string type?
-        this._bankName=value;
-    }
 
     //methods
     newCustomer(customer){
+        //what if there are customers with equal names and different IDs
+        //what is the definition for existing customer???
         if (this.allCustomers.some(e=>e.personalId==customer.personalId)) {
             throw new Error(`${customer.firstName} ${customer.lastName} is already our customer!`);
         }                        
@@ -33,12 +31,12 @@ class Bank {
         }
         
         if (target.hasOwnProperty('transactions')) {
-            
+            target.transactions.push(`${target.firstName} ${target.lastName} made deposit of ${amount}$!`);
         }else{
             target.transactions=[];
             target.transactions.push(`${target.firstName} ${target.lastName} made deposit of ${amount}$!`);
         }        
-        console.log(target.transactions);
+        //console.log(target.transactions);
         return `${target.totalMoney}$`;
     }
 
@@ -52,6 +50,7 @@ class Bank {
         }
 
         target.totalMoney-=amount;
+
         if (target.hasOwnProperty('transactions')) {
             target.transactions.push(`${target.firstName} ${target.lastName} withdrew ${amount}$!`);
         }else{
@@ -68,16 +67,18 @@ class Bank {
             throw new Error('We have no customer with this ID!');
         }
         let target=this.allCustomers.find(e=>e.personalId==personalId);
+        console.log(target);
         let result='';
-        result+=`Bank name: ${this.bankName}\n`;
+        result+=`Bank name: ${this._bankName}\n`;
         result+=`Customer name: ${target.firstName} ${target.lastName}\n`;
         result+=`Customer ID: ${target.personalId}\n`;
         result+=`Total Money: ${target.totalMoney}$\n`;
         result+=`Transactions:\n`;
         
-        for (let index = target.transactions.length-1; index =0; index--) {
-            result+=`${index}. ${target.transaction[index]}`;
+        for (let index = target.transactions.length-1; index >=0; index-- ){
+            result+=`${index+1}. ${target.transactions[index]}\n`;
         }
+        
         return result.trimEnd();
     }
 }
@@ -85,19 +86,16 @@ class Bank {
 
 let bank = new Bank('SoftUni Bank');
 
-console.log(bank.newCustomer({firstName: 'Svetlin', lastName: 'Nakov', personalId: 6233267}));
-console.log(bank.newCustomer({firstName: 'Mihaela', lastName: 'Mileva', personalId: 4151596}));
+//what is the private of this field???
+bank._bankName='pesho'; 
 
+bank.newCustomer({ firstName: 'Svetlin', lastName: 'Nakov', personalId: 1111111 });
+bank.newCustomer({ firstName: 'Svetlin', lastName: 'Kirov', personalId: 2 });
 
+//bank.depositMoney(11, 250);
+console.log(bank.depositMoney(1111111, 250));
+bank.withdrawMoney(1111111, 125);
 
-console.log(bank.depositMoney(6233267, 250));
+let output = bank.customerInfo(1111111);
 
-console.log(bank.withdrawMoney(6233267,5));
-
-console.log(bank.depositMoney(6233267, 250));
-console.log(bank.depositMoney(4151596,555));
-
-console.log(bank.withdrawMoney(6233267, 125));
-
-console.log(bank.customerInfo(6233267));
-
+console.log(output);
