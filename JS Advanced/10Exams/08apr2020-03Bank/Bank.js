@@ -38,6 +38,7 @@ class Bank {
             target.transactions=[];
             target.transactions.push(`${target.firstName} ${target.lastName} made deposit of ${amount}$!`);
         }        
+        console.log(target.transactions);
         return `${target.totalMoney}$`;
     }
 
@@ -52,13 +53,32 @@ class Bank {
 
         target.totalMoney-=amount;
         if (target.hasOwnProperty('transactions')) {
-            
+            target.transactions.push(`${target.firstName} ${target.lastName} withdrew ${amount}$!`);
         }else{
             target.transactions=[];
             target.transactions.push(`${target.firstName} ${target.lastName} withdrew ${amount}$!`);
         }  
+        //console.log(target.transactions);
 
         return `${target.totalMoney}$`;
+    }
+
+    customerInfo (personalId){
+        if (!this.allCustomers.some(e=>e.personalId==personalId)) {
+            throw new Error('We have no customer with this ID!');
+        }
+        let target=this.allCustomers.find(e=>e.personalId==personalId);
+        let result='';
+        result+=`Bank name: ${this.bankName}\n`;
+        result+=`Customer name: ${target.firstName} ${target.lastName}\n`;
+        result+=`Customer ID: ${target.personalId}\n`;
+        result+=`Total Money: ${target.totalMoney}$\n`;
+        result+=`Transactions:\n`;
+        
+        for (let index = target.transactions.length-1; index =0; index--) {
+            result+=`${index}. ${target.transaction[index]}`;
+        }
+        return result.trimEnd();
     }
 }
 
@@ -79,5 +99,5 @@ console.log(bank.depositMoney(4151596,555));
 
 console.log(bank.withdrawMoney(6233267, 125));
 
-// console.log(bank.customerInfo(6233267));
+console.log(bank.customerInfo(6233267));
 
