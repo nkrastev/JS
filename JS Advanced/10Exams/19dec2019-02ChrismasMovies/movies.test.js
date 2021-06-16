@@ -160,8 +160,9 @@ describe("Christmas movies Tests", function() {
         christmas.buyMovie('Movie 2',['gosho','petar']);
         christmas.watchMovie('Name');
         christmas.watchMovie('Name');
-        christmas.watchMovie('Name');          
-        assert.equal(christmas.favouriteMovie(),'Your favourite movie is Name and you have watched it 3 times!');  
+        christmas.watchMovie('Name');  
+                
+        assert.strictEqual(christmas.favouriteMovie(),'Your favourite movie is Name and you have watched it 3 times!');  
     });
     it('same as the previous test', function() {
         christmas.buyMovie('Name', ['ivan','petar']);
