@@ -103,6 +103,46 @@ describe("Tests", function() {
         expect(hp.vacationers.length).to.be.equal(2);   
     }); 
     //insuranceIncluded getter
+    it('insuranceIncluded getter', function(){          
+        expect(hp.insuranceIncluded).to.be.equal(false);   
+    }); 
+    it('insuranceIncluded setter', function(){  
+        hp.insuranceIncluded=true;        
+        expect(hp.insuranceIncluded).to.be.equal(true);   
+    });
+    it('insuranceIncluded throw', function(){  
+        expect(function(){hp.insuranceIncluded='Dimitri4ko'}).to.throw(Error, 'Insurance status must be a boolean');           
+    }); 
+    //generateHolidayPackage()
+    it('generateHolidayPackage throw no vacationers', function(){  
+        expect(function(){hp.generateHolidayPackage()}).to.throw(Error, 'There must be at least 1 vacationer added');           
+    }); 
+    it('generateHolidayPackage Summer, no ins', function(){ 
+        hp.addVacationer('John Doe');
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nPrice: 600');        
+        hp.addVacationer('John Doe2');
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nJohn Doe2\nPrice: 1000');        
+    });
+    it('generateHolidayPackage Summer, + ins', function(){ 
+        hp.addVacationer('John Doe');
+        hp.insuranceIncluded=true;
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nPrice: 700');        
+        hp.addVacationer('Doe John');
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nDoe John\nPrice: 1100');        
+    }); 
+    it('generateHolidayPackage Winter, no ins', function(){ 
+        hp.addVacationer('John Doe');
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nPrice: 600');        
+        hp.addVacationer('John Doe2');
+        expect(hp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Bulgaria\nVacationers:\nJohn Doe\nJohn Doe2\nPrice: 1000');        
+    });
+    it('generateHolidayPackage Season June, no ins', function(){ 
+        let newHp=new HolidayPackage('Dest','June')
+        newHp.addVacationer('John Doe');
+        expect(newHp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Dest\nVacationers:\nJohn Doe\nPrice: 400');        
+        newHp.addVacationer('John Doe2');
+        expect(newHp.generateHolidayPackage()).to.be.equal('Holiday Package Generated\nDestination: Dest\nVacationers:\nJohn Doe\nJohn Doe2\nPrice: 800');        
+    });
 });
 
 
