@@ -30,7 +30,6 @@ function solveClasses() {
                 }
             }           
             if (this.tasks.length==0) {
-
                 return `${this.firstName}, you have finished all your tasks. You can rest now.`;
             }else{
                 this.tasks.splice(newestIndex, 1);
@@ -58,8 +57,33 @@ function solveClasses() {
             this.experience+=years;
         }
     }
-    class Senior{
-        
+    class Senior extends Developer{
+        constructor(firstName, lastName, bonus, experience){
+            super(firstName,lastName);
+            this.baseSalary+=bonus;
+            this.experience=experience+5;
+        }
+        changeTaskPriority(taskId){
+            let taskItem={};
+            let taskIndex=-1;
+            for (let index = 0; index < this.tasks.length; index++) {               
+                if (this.tasks[index].id==taskId) {
+                    taskItem=this.tasks[index];
+                    taskIndex=index;
+                }
+            } 
+            //remove the task
+            this.tasks.splice(taskIndex, 1);
+            //change priority and reorder
+            if (taskItem.priority=='high') {
+                taskItem.priority='low';
+                this.tasks.push(taskItem);
+            }else{
+                taskItem.priority='high';
+                this.tasks.unshift(taskItem);
+            }
+            return taskItem;
+        }
     }
 
     return {
@@ -87,8 +111,8 @@ console.log(developer.getSalary());
 
 const junior = new classes.Junior("Jonathan", "Joestar", 200, 2);
 console.log(junior.getSalary());
-/*
+
 const senior = new classes.Senior("Joseph", "Joestar", 200, 2);
 senior.addTask(1, "Create functionality", "low");
 senior.addTask(2, "Update functionality", "high");
-console.log(senior.changeTaskPriority(1)["priority"]);*/
+console.log(senior.changeTaskPriority(1)["priority"]);
