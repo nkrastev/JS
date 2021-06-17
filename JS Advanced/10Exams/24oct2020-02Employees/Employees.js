@@ -48,8 +48,15 @@ function solveClasses() {
             return result.trimEnd();
         }
     }
-    class Junior{
-        
+    class Junior extends Developer{
+        constructor(firstName, lastName, bonus, experience){
+            super(firstName,lastName);
+            this.baseSalary+=bonus;
+            this.experience=experience;
+        }
+        learn( years ){
+            this.experience+=years;
+        }
     }
     class Senior{
         
@@ -77,10 +84,10 @@ console.log(developer.reviewTasks());
 console.log(developer.getSalary());
 
 
-/*
+
 const junior = new classes.Junior("Jonathan", "Joestar", 200, 2);
 console.log(junior.getSalary());
-
+/*
 const senior = new classes.Senior("Joseph", "Joestar", 200, 2);
 senior.addTask(1, "Create functionality", "low");
 senior.addTask(2, "Update functionality", "high");
