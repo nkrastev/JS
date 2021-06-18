@@ -24,6 +24,8 @@ function pressHouse(){
     }
 }
 
+
+
 let classes = solveClasses();
 let lorem = new classes.Article("Lorem", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce non tortor finibus, facilisis mauris vel…");
 console.log(lorem.toString()); 
