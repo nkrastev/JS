@@ -1,20 +1,51 @@
-function pressHouse(){
+function solveClasses(){
 
     class Article{
         constructor(title, content){
             this.title=title;
-            this.console=content;
+            this.content=content;
         }
         toString(){
             //TODO is there a space before title?
-            return ` Title: ${this.title}\nContent: ${this.content}`;
+            return `Title: ${this.title}\nContent: ${this.content}`;
         }            
     }
 
     class ShortReports extends Article{
         constructor(title, content, originalResearch){
             super(title, content);
+            this.originalResearches=originalResearch; //object with properties title and author
+            this.comments=[];
         }
+        get content(){
+            return this._content;
+        }
+        set content(value){
+            if (value.length>=150) {
+                throw new Error('Short reports content should be less then 150 symbols.');
+            }
+            this._content=value;
+        }
+        get originalResearches(){
+            return this._originalResearches;
+        }
+        set originalResearches(value){
+            if (!value.hasOwnProperty('title') || !value.hasOwnProperty('author')) {
+                throw new Error('The original research should have author and title.');
+            }
+            this._originalResearches=value;
+        }
+        addComment(comment){
+            this.comments.push(comment);
+            return 'The comment is added.';
+        }
+        toString(){
+            
+        }
+    }
+
+    class BookReview{
+
     }
 
     return {
