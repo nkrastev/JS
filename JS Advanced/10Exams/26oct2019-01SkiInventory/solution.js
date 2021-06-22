@@ -2,9 +2,11 @@ function solve() {
 
    const btnAddProduct=document.querySelector('#add-new > button');
    const btnFilter=document.querySelector('#products > div > button');
+   const btnBuy=document.querySelector('#myProducts > button');
 
    btnAddProduct.addEventListener('click', onClickAddProduct);
    btnFilter.addEventListener('click', onClickFilter);
+   btnBuy.addEventListener('click', onClickBuy);
 
    function onClickAddProduct(event){
       event.preventDefault();//prevent page from reloading
@@ -60,6 +62,44 @@ function solve() {
 
    function onClickAddMyProducts(event){
       event.preventDefault();//prevent page from reloading
+
+      const liNode=event.target.parentNode.parentNode;
+
+
+      const prodName=liNode.querySelector('span').textContent;
+      const available=liNode.querySelector('strong').textContent;
+      const price=Number(liNode.querySelectorAll('strong')[1].textContent);
+      
+      //add li to my products
+      const ulMyProducts=document.querySelector('#myProducts > ul');
+      
+      let liToBeAdded=e('li',prodName,null);      
+      let priceToBeAdded=e('strong',price.toFixed(2),null);      
+      liToBeAdded.appendChild(priceToBeAdded);
+      ulMyProducts.appendChild(liToBeAdded);
+
+      //total price change
+      let totalPrice=document.querySelector('body > h1:nth-child(4)');
+      let totalPriceNumber=Number(totalPrice.textContent.replace('Total Price: ',''));
+      totalPrice.textContent='Total Price: '+(totalPriceNumber+Number(priceToBeAdded.textContent)).toFixed(2);
+
+
+      if (available=='Available: 1') {
+         //remove li
+         event.target.parentNode.parentNode.remove();
+      }else{
+         //decrease availability
+         let availabilityItem=liNode.querySelector('strong');
+         let availabilityNumber=Number(availabilityItem.textContent.replace('Available: ',''));
+         availabilityItem.textContent='Available: '+(availabilityNumber-1);
+      }
+
+   }
+
+   function onClickBuy(event) {
+      event.preventDefault();//prevent page from reloading
+      document.querySelector('body > h1:nth-child(4)').textContent='Total Price: 0.00';      
+      document.querySelector('#myProducts > ul').innerHTML='';
    }
 
    //factory function, create DOM element
