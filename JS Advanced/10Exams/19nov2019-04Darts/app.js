@@ -34,7 +34,8 @@ function dart(){
 			awayPoints+=sixPoints;
 			turn = 'home';
 		}
-		setNewPoints(homePoints, awayPoints);		
+		setNewPoints(homePoints, awayPoints);	
+		changeTurn();	
 	}
 
 	function onFifth(event){
@@ -47,6 +48,7 @@ function dart(){
 			turn = 'home';
 		}
 		setNewPoints(homePoints, awayPoints);
+		changeTurn();
 	}
 
 	function onFourth(event){
@@ -59,6 +61,7 @@ function dart(){
 			turn = 'home';
 		}
 		setNewPoints(homePoints, awayPoints);
+		changeTurn();
 	}
 
 	function onThird(event){
@@ -71,6 +74,7 @@ function dart(){
 			turn = 'home';
 		}
 		setNewPoints(homePoints, awayPoints);
+		changeTurn();
 	}
 
 	function onSecond(event){
@@ -83,6 +87,7 @@ function dart(){
 			turn = 'home';
 		}
 		setNewPoints(homePoints, awayPoints);
+		changeTurn();
 	}
 
 	function onFirst(event){
@@ -95,6 +100,20 @@ function dart(){
 			turn = 'home';
 		}
 		setNewPoints(homePoints, awayPoints);
+		changeTurn();
+	}
+
+	function changeTurn(){
+		let firstLine=document.querySelector('#turns > p:nth-child(1)').textContent;
+		let secondLine=document.querySelector('#turns > p:nth-child(2)').textContent;
+
+		if (firstLine=='Turn on Home') {
+			document.querySelector('#turns > p:nth-child(1)').textContent='Turn on Away';
+			document.querySelector('#turns > p:nth-child(2)').textContent='Next is Home';
+		}else{
+			document.querySelector('#turns > p:nth-child(1)').textContent='Turn on Home';
+			document.querySelector('#turns > p:nth-child(2)').textContent='Next is Away';
+		}
 	}
 		
 	function setNewPoints(home, away){
