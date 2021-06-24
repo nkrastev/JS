@@ -100,7 +100,8 @@ function dart(){
 	}
 
 	
-
+	
+	let isGameEnded=false;
 
 	function setNewPoints(home, away){
 		document.querySelector('#Home > p:nth-child(1)').textContent=home;
@@ -109,13 +110,18 @@ function dart(){
 		if (home>=100) {
 			document.querySelector('#Home > p:nth-child(2)').style.background='green';
 			document.querySelector('#Away > p:nth-child(2)').style.background='red';
-			
+			isGameEnded=true;
 		}
 		if (away>=100) {
 			document.querySelector('#Home > p:nth-child(2)').style.background='red';
 			document.querySelector('#Away > p:nth-child(2)').style.background='green';
-			//break dart;
+			isGameEnded=true;
 		}
 	}
 
+	if (isGameEnded) {
+		return false;
+	}
+
+	
 }
