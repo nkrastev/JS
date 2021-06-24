@@ -23,9 +23,7 @@ function dart(){
 	let homePoints=Number(document.querySelector('#Home > p:nth-child(1)').textContent);
 	let awayPoints=Number(document.querySelector('#Away > p:nth-child(1)').textContent);
 
-	let turn='home';
-
-		
+	let turn='home';		
 
 	function onSixth(event){
 		event.stopPropagation();
@@ -98,11 +96,7 @@ function dart(){
 		}
 		setNewPoints(homePoints, awayPoints);
 	}
-
-	
-	
-	let isGameEnded=false;
-
+		
 	function setNewPoints(home, away){
 		document.querySelector('#Home > p:nth-child(1)').textContent=home;
 		document.querySelector('#Away > p:nth-child(1)').textContent=away;
@@ -110,18 +104,13 @@ function dart(){
 		if (home>=100) {
 			document.querySelector('#Home > p:nth-child(2)').style.background='green';
 			document.querySelector('#Away > p:nth-child(2)').style.background='red';
-			isGameEnded=true;
+			
 		}
 		if (away>=100) {
 			document.querySelector('#Home > p:nth-child(2)').style.background='red';
-			document.querySelector('#Away > p:nth-child(2)').style.background='green';
-			isGameEnded=true;
+			document.querySelector('#Away > p:nth-child(2)').style.background='green';						
+			
 		}
-	}
-
-	if (isGameEnded) {
-		return false;
-	}
-
-	
+		
+	}	
 }
