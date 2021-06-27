@@ -1,0 +1,51 @@
+{
+  "url": "https://api.github.com/repos/testnakov/test-nakov-repo/issues/2965",
+  "repository_url": "https://api.github.com/repos/testnakov/test-nakov-repo",
+  "labels_url": "https://api.github.com/repos/testnakov/test-nakov-repo/issues/2965/labels{/name}",
+  "comments_url": "https://api.github.com/repos/testnakov/test-nakov-repo/issues/2965/comments",
+  "events_url": "https://api.github.com/repos/testnakov/test-nakov-repo/issues/2965/events",
+  "html_url": "https://github.com/testnakov/test-nakov-repo/issues/2965",
+  "id": 930938809,
+  "node_id": "MDU6SXNzdWU5MzA5Mzg4MDk=",
+  "number": 2965,
+  "title": "Ive created Issue NK",
+  "user": {
+    "login": "nkrastev",
+    "id": 8632258,
+    "node_id": "MDQ6VXNlcjg2MzIyNTg=",
+    "avatar_url": "https://avatars.githubusercontent.com/u/8632258?v=4",
+    "gravatar_id": "",
+    "url": "https://api.github.com/users/nkrastev",
+    "html_url": "https://github.com/nkrastev",
+    "followers_url": "https://api.github.com/users/nkrastev/followers",
+    "following_url": "https://api.github.com/users/nkrastev/following{/other_user}",
+    "gists_url": "https://api.github.com/users/nkrastev/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/nkrastev/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/nkrastev/subscriptions",
+    "organizations_url": "https://api.github.com/users/nkrastev/orgs",
+    "repos_url": "https://api.github.com/users/nkrastev/repos",
+    "events_url": "https://api.github.com/users/nkrastev/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/nkrastev/received_events",
+    "type": "User",
+    "site_admin": false
+  },
+  "labels": [
+
+  ],
+  "state": "open",
+  "locked": false,
+  "assignee": null,
+  "assignees": [
+
+  ],
+  "milestone": null,
+  "comments": 0,
+  "created_at": "2021-06-27T14:02:57Z",
+  "updated_at": "2021-06-27T14:02:57Z",
+  "closed_at": null,
+  "author_association": "NONE",
+  "active_lock_reason": null,
+  "body": null,
+  "closed_by": null,
+  "performed_via_github_app": null
+}
