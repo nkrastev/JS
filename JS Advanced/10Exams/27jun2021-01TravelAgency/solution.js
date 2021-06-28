@@ -63,13 +63,9 @@ function solution() {
     btnEdit.disabled=true;
     btnContinue.disabled=true;
   }
-
   function onContinue(event) {
     document.querySelector('#block').innerHTML='<h3>Thank you for your reservation!</h3>';
   }
-
-
-
   //factory function, create DOM element
   function e(type, content, className){
     const result= document.createElement(type);
