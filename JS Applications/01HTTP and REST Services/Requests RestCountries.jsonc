@@ -1,0 +1,3 @@
+GET https://restcountries.eu/rest/v2/name/Italy?fields=name;capital;region;population
+
+GET https://restcountries.eu/rest/v2/lang/de?fields=name;region
