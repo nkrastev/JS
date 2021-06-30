@@ -1,0 +1,37 @@
+//Task 1
+GET https://restcountries.eu/rest/v2/name/Italy?fields=name;capital;region;population
+GET https://restcountries.eu/rest/v2/lang/de?fields=name;region
+
+//Task 2
+GET http://localhost:3030/jsonstore/bus/businfo/1287
+GET http://localhost:3030/jsonstore/bus/businfo/1308
+GET http://localhost:3030/jsonstore/bus/businfo/1327 
+GET http://localhost:3030/jsonstore/bus/businfo/2334
+
+//Task 3
+GET http://localhost:3030/jsonstore/phonebook
+
+//Task 4
+POST
+{
+    "person": "Nikolay",
+    "phone": "00 00 00",
+    "_id": "2da14df5-9b45-4d3c-af6e-f5a79804a9ca"
+}
+
+//Task 5
+GET	http://dummy.restapiexample.com/api/v1/employees
+GET	http://dummy.restapiexample.com/api/v1/employee/1
+POST http://dummy.restapiexample.com/api/v1/create
+{"name":"Nikolay","salary":"5","age":"7"} //200 success
+PUT > too many requests :)
+DELETE http://dummy.restapiexample.com/api/v1/delete/9612
+{
+    "status": "success",
+    "data": "9612",
+    "message": "Successfully! Record has been deleted"
+}
+
+//Task 6
+
+
