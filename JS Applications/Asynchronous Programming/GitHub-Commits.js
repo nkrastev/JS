@@ -12,7 +12,7 @@ async function loadCommits() {
         let data = await response.json();
         let li='';
         if (response.status !== 200) {
-            li=e('li','Error 404 Not Found');
+            li=e('li','Error 404. Item Not Found');
             ul.appendChild(li);
         }else{
             data.forEach(element => {
