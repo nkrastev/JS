@@ -43,8 +43,20 @@ function onClickRecipeItem(event){
     }else{
         id=event.target.parentNode.parentNode.id;
     }
+    try {
+        const url = `http://localhost:3030/jsonstore/cookbook/details/`+id;
+        const response = await fetch(url);
+        const recipe = await response.json(); 
 
-    
+        console.log(recipe);
+        document.getElementById(id).innerHTML='';
+
+        
+       
+    } catch (error) {
+        console.log('Error Load Specific Id');
+    } 
+    //TODO load in the DOM, data is in recipe OBJECT
         
     
 }
