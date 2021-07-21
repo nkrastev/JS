@@ -6,6 +6,7 @@ import {homeView} from      "./views/home.js";
 import {detailsView} from   "./views/details.js";
 import {registerView} from  "./views/register.js";
 import {loginView} from     "./views/login.js";
+import {createView} from     "./views/create.js";
 import { logout } from "./api/api.js";
 
 //routes and views
@@ -13,6 +14,7 @@ page('/', homeView);
 page('/details/:id', detailsView);
 page('/register', registerView);
 page('/login', loginView);
+page('/create', createView);
 
 page.start();
 
@@ -20,8 +22,11 @@ page.start();
 header();
 
 //logout
-document.getElementById('logoutBtn').addEventListener('click', async ()=>{
-    await logout();
-    header();
-    page.redirect('/');
-})
+if (sessionStorage.getItem('userId')) {
+    document.getElementById('logoutBtn').addEventListener('click', async ()=>{
+        await logout();
+        header();
+        page.redirect('/');
+    })
+}
+

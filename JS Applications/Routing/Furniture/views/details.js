@@ -4,7 +4,7 @@ import { getItemById } from '../api/data.js';
 export async function detailsView(context) {
 
     const detailedData = await getItemById(context.params.id);
-    console.log(detailedData);
+    const userId = sessionStorage.getItem('userId');
 
     const layoutTemplate = item => html`<div class="container">
     <div class="row space-top">
@@ -16,7 +16,7 @@ export async function detailsView(context) {
         <div class="col-md-4">
             <div class="card text-white bg-primary">
                 <div class="card-body">
-                    <img src="${item.img.replace('./','/')}" />
+                    <img src="${item.img.replace('./', '/')}" />
                 </div>
             </div>
         </div>
@@ -27,13 +27,19 @@ export async function detailsView(context) {
             <p>Description: <span>${item.description}</span></p>
             <p>Price: <span>${item.price}</span></p>
             <p>Material: <span>${item.material}</span></p>
-            <div>
-                <a href=”#” class="btn btn-info">Edit</a>
-                <a href=”#” class="btn btn-red">Delete</a>
-            </div>
+            ${userId
+              ? btnTemplate
+              : ''
+              }
         </div>
     </div>
 </div>`;
+
+    const btnTemplate = html`
+    <div>
+    <a href=”#” class="btn btn-info">Edit</a>
+    <a href=”#” class="btn btn-red">Delete</a>
+    </div>`;
 
 
 
