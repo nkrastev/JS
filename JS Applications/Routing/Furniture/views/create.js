@@ -1,5 +1,6 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { getItemById } from '../api/data.js';
+import page from "//unpkg.com/page/page.mjs";
+import { getItemById, createFurniture } from '../api/data.js';
 
 export async function createView(context) {
 
@@ -57,30 +58,101 @@ export async function createView(context) {
     const main = document.querySelector('main');
     render(layoutTemplate(), main);
 
-    function onFormSubmit(event){
+    async function onFormSubmit(event){
         event.preventDefault();
 
         let make=document.querySelector('#new-make');
+        let year=document.querySelector('#new-year');
         let price=document.querySelector('#new-price');
         let model=document.querySelector('#new-model');
         let image=document.querySelector('#new-image');
         let description=document.querySelector('#new-description');
         let material=document.querySelector('#new-material');
 
-        //validation
+        let isAllValid=true;
+        //validation make
         if (make.value.length<4) {
             make.classList='form-control';
-            make.classList.add('is-invalid');            
+            make.classList.add('is-invalid');                       
             render(layoutTemplate(), main);
+            return;
         }else{
             make.classList='form-control';
             make.classList.add('is-valid');
             render(layoutTemplate(), main);
         }
+        //validation model
+        if (model.value.length<4) {
+            model.classList='form-control';
+            model.classList.add('is-invalid');                       
+            render(layoutTemplate(), main);
+            return;
+        }else{
+            model.classList='form-control';
+            model.classList.add('is-valid');
+            render(layoutTemplate(), main);
+        }
+        //validation •	Year must be between 1950 and 2050
+        if (year.value>2050 || year.value<1950) {
+            year.classList='form-control';
+            year.classList.add('is-invalid');                        
+            render(layoutTemplate(), main);
+            return;
+        }else{
+            year.classList='form-control';
+            year.classList.add('is-valid');
+            render(layoutTemplate(), main);
+        }
+        //validation •	Description must be more than 10 symbols
+        if (description.value.length<10) {
+            description.classList='form-control';
+            description.classList.add('is-invalid'); 
+            return;          
+            render(layoutTemplate(), main);
+        }else{
+            description.classList='form-control';
+            description.classList.add('is-valid');
+            render(layoutTemplate(), main);
+        }
+        //validation •	Price must be a positive number
+        if (price.value<=0) {
+            price.classList='form-control';
+            price.classList.add('is-invalid');                      
+            render(layoutTemplate(), main);
+            return;
+        }else{
+            price.classList='form-control';
+            price.classList.add('is-valid');
+            render(layoutTemplate(), main);
+        }
+        //validation •	Image URL is required
+        if (image.value=='') {
+            image.classList='form-control';
+            image.classList.add('is-invalid');            
+            render(layoutTemplate(), main);
+            return;
+        }else{
+            image.classList='form-control';
+            image.classList.add('is-valid');
+            render(layoutTemplate(), main);
+        }       
+        //create object
+        const newFurniture={           
+            make:make.value,
+            model:model.value,
+            year:year.value,
+            description:description.value,
+            price:price.value,
+            "img": image.value,
+            material:material.value            
+        }
 
+        console.log(newFurniture);
         //query for save data
+        await createFurniture(newFurniture);
 
         //redirect to main
+        page.redirect('/');
     }
 
 }

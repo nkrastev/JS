@@ -1,10 +1,17 @@
 import { html, render } from 'https://unpkg.com/lit-html?module';
-import { getItemById } from '../api/data.js';
+import page from "//unpkg.com/page/page.mjs";
+import { deleteFurniture, getItemById } from '../api/data.js';
 
 export async function detailsView(context) {
 
     const detailedData = await getItemById(context.params.id);
     const userId = sessionStorage.getItem('userId');
+    let currentUserIsOwner;
+    if (detailedData._ownerId==userId) {
+        currentUserIsOwner=true;
+    }else{
+        currentUserIsOwner=false;
+    }
 
     const layoutTemplate = item => html`<div class="container">
     <div class="row space-top">
@@ -27,7 +34,7 @@ export async function detailsView(context) {
             <p>Description: <span>${item.description}</span></p>
             <p>Price: <span>${item.price}</span></p>
             <p>Material: <span>${item.material}</span></p>
-            ${userId
+            ${userId && currentUserIsOwner
               ? btnTemplate
               : ''
               }
@@ -37,13 +44,18 @@ export async function detailsView(context) {
 
     const btnTemplate = html`
     <div>
-    <a href=”#” class="btn btn-info">Edit</a>
-    <a href=”#” class="btn btn-red">Delete</a>
+    <a href="/edit/${context.params.id}" class="btn btn-info">Edit</a>
+    <a href="#" @click=${onDeleteItem} class="btn btn-red" id=${context.params.id}>Delete</a>
     </div>`;
-
 
 
     const main = document.querySelector('main');
     render(layoutTemplate(detailedData), main);
 
+    async function onDeleteItem(event){
+        event.preventDefault();        
+        await deleteFurniture(event.target.id);
+        page.redirect('/');
+    }
+    
 }
