@@ -17,6 +17,6 @@
         "chai": "4.3.4",
         "http-server": "0.12.3",
         "mocha": "8.3.2",
-        "playwright-chromium": "^1.9.2"
+        "playwright-chromium": "^1.13.0"
     }
 }

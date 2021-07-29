@@ -5,9 +5,7 @@ import { getUserListings } from '../api/data.js';
 import { header } from "./header.js";
 
 export async function myListingsView() {
-
     
-    console.log('My Listings view');
     const userId = sessionStorage.getItem('userId');    
 
     if (!userId) {
@@ -16,10 +14,15 @@ export async function myListingsView() {
         page.redirect('/');
     }
 
+    console.log('myListingsView'); 
+    console.log(userId);
+    console.log(sessionStorage.getItem('accessToken'))
+
     const userListings = await getUserListings(userId);
     console.log(userListings);
+    //const userListings=allListings.filter(l=>l._ownerId===userId);    
 
-    const templateNoItems = html`<p class="no-cars"> You haven't listed any cars yet.</p>`;
+    const templateNoItems = html`<p class="no-cars"> You haven't listed any cars yet</p>`;
     const templateItem = item => html`
     <div class="listing">
         <div class="preview">

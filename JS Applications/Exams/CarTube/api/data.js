@@ -25,8 +25,8 @@ export async function editListing(id, data){
     return await api.put(host + '/data/cars/'+id, data);
 }
 export async function getUserListings(userId) {
-    const allData= await api.get(host + '/data/cars');    
-    return allData.filter(l=>l._ownerId==userId);
+    return await api.get(host + `/data/cars?where=_ownerId%3D%22${userId}%22&sortBy=_createdOn%20desc`);    
+    //return allData.filter(l=>l._ownerId==userId);
 }
 
 

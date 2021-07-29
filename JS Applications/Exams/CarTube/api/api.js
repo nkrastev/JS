@@ -29,7 +29,7 @@ function getOptions(method = 'get', body) {
         headers: {},
     };
 
-    const token = sessionStorage.getItem('authToken');
+    const token = sessionStorage.getItem('accessToken');
     if (token != null) {
         options.headers['X-Authorization'] = token;
     }
@@ -62,13 +62,13 @@ export async function login(username, password) {
     const result= await post(settings.host+'/users/login', {username, password});
     sessionStorage.setItem('userId', result._id);
     sessionStorage.setItem('username', result.username);
-    sessionStorage.setItem('authToken', result.accessToken);    
+    sessionStorage.setItem('accessToken', result.accessToken);    
     return result;
 }
 export async function register(username, password) {
     const result= await post(settings.host+'/users/register', {username, password});
     sessionStorage.setItem('userId', result._id);    
-    sessionStorage.setItem('authToken', result.accessToken);
+    sessionStorage.setItem('accessToken', result.accessToken);
     sessionStorage.setItem('username', result.username);    
     return result;
 }
@@ -76,8 +76,7 @@ export async function register(username, password) {
 export async function logout() {
     const result= await get(settings.host+'/users/logout');
     sessionStorage.removeItem('userId', result._id);    
-    sessionStorage.removeItem('authToken', result.accessToken);
-    sessionStorage.removeItem('username', result.username);    
-    
+    sessionStorage.removeItem('accessToken', result.accessToken);
+    sessionStorage.removeItem('username', result.username);        
     return result;
 }
