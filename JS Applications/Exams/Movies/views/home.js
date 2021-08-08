@@ -4,8 +4,8 @@ import { getAllMovies } from "../api/data.js";
 
 export async function homeView() {
 
-    const moviesData = await getAllMovies();
-    let userId = sessionStorage.getItem('userId');
+    const moviesData=await getAllMovies();
+    console.log(moviesData);
 
     const templateMovies = item => html`
     <div class="card mb-4">
@@ -21,17 +21,11 @@ export async function homeView() {
     </div>
     `;
 
-    const templateAddMovie = html`
-    <section id="add-movie-button">
-        <a href="/create" class="btn btn-warning ">Add Movie</a>
-    </section>`;
-
     const layoutTemplate = data => html`        
     <h1 class="text-center">Movies, Home view</h1>
-        ${userId
-          ? templateAddMovie
-          : ''
-          }
+    <section id="add-movie-button">
+        <a href="/create" class="btn btn-warning ">Add Movie</a>
+    </section>
     <section id="movie">
         <div class=" mt-3 ">
             <div class="row d-flex d-wrap">
