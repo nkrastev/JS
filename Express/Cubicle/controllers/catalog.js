@@ -1,5 +1,10 @@
 module.exports = {
-    catalog: (req, res) =>{        
-        res.render('index', {title: 'Home page'});
+    catalog: async (req, res) =>{
+        const cubes = await req.storage.getAll();        
+        const ctx = {
+            title: 'Home page',
+            cubes
+        }        
+        res.render('index', ctx);
     }
 }

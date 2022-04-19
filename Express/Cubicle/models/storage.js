@@ -33,7 +33,7 @@ async function create(cube){
     data[id] = cube;
 
     try {
-        await fs.writeFile('./models/data.json', JSON.stringify(data));
+        await fs.writeFile('./models/data.json', JSON.stringify(data, null, 2));
     } catch (err) {
         console.error('Error writing to JSON file');
     }
