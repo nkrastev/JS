@@ -1,5 +1,5 @@
 module.exports = {
-    catalog: (req, res) =>{
+    catalog: (req, res) =>{        
         res.render('index', {title: 'Home page'});
     }
 }
