@@ -24,7 +24,7 @@ async function getAll() {
   return Object.entries(data).map(([id, v]) => Object.assign({}, { id }, v));
 }
 
-async function getById(){
+async function getById(id){
     return data[id];
 }
 
