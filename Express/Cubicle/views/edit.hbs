@@ -2,6 +2,9 @@
 <h1>Edit</h1>
 <div class="form">
   <form action="/edit/{{_id}}" method="POST">
+    {{#if error}}
+    <p>{{error}}</p>
+    {{/if}}
     <label for="name">Name</label>
     <input type="text" id="name" name="name" value="{{name}}" />
     <label for="name">Description</label>

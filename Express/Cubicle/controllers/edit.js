@@ -20,9 +20,15 @@ module.exports = {
             description: req.body.description,
             imageUrl: req.body.imageUrl,
             difficultyLevel: Number(req.body.difficultyLevel)
-        }        
-        console.log(cube);
-        await req.storage.edit(req.params.id, cube);
+        }     
+        
+        try {
+            await req.storage.edit(req.params.id, cube);
+        } catch (err) {            
+            if (err.name=='ValidationError') {                
+                return res.render('edit', {title: `Error editing`, cube: cube, error: 'Validations error.'});
+            }            
+        } 
 
         res.redirect('/');
     }

@@ -10,7 +10,13 @@ module.exports = {
             difficultyLevel: Number(req.body.difficultyLevel)
         }        
 
-        await req.storage.create(cube);
+        try {
+            await req.storage.create(cube);
+        } catch (err) {            
+            if (err.name=='ValidationError') {                
+                return res.render('create', {title: 'Create cube', error: 'All fields are required. Image has to start with http/s...'});
+            }            
+        }        
 
         res.redirect('/');
     }
