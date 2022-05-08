@@ -1,0 +1,48 @@
+[{
+  "_id": {
+    "$oid": "6277afc198e809136f892899"
+  },
+  "name": "21x21 Cube",
+  "description": "Mega 21 side by side cube",
+  "imageUrl": "https://i.ytimg.com/vi/CoAeCy1R6Qo/maxresdefault.jpg",
+  "difficultyLevel": 5,
+  "__v": 0,
+  "comments": []
+},{
+  "_id": {
+    "$oid": "6277b01e98e809136f89289b"
+  },
+  "name": "Gan356 Air SM EDITED",
+  "description": "des",
+  "imageUrl": "https://ae01.alicdn.com/kf/HTB1CSddXRxRMKJjy0Fdq6yifFXa6/Gan-356-Air-SM-3x3-Black-Magic-cube-GAN-Air-SM-Magnetic-3x3x3-Speed-cube-gans.jpg",
+  "difficultyLevel": 1,
+  "__v": 2,
+  "comments": [
+    {
+      "$oid": "6277cd77b92ea286d12a9602"
+    },
+    {
+      "$oid": "6277cdb5b92ea286d12a960c"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6277b02e98e809136f89289d"
+  },
+  "name": "Eco dark",
+  "description": "some other desc",
+  "imageUrl": "https://thingsidesire.com/wp-content/uploads/2018/06/Eco-Dark-Rubik%E2%80%99s-Cube2.jpg",
+  "difficultyLevel": 1,
+  "__v": 0,
+  "comments": []
+},{
+  "_id": {
+    "$oid": "6277b04198e809136f89289f"
+  },
+  "name": "Pyramid",
+  "description": "pyramid cube description",
+  "imageUrl": "https://images-na.ssl-images-amazon.com/images/I/61izOzq%2BBAL._SY355_.jpg",
+  "difficultyLevel": 3,
+  "__v": 0,
+  "comments": []
+}]
