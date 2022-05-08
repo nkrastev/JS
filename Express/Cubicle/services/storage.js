@@ -1,16 +1,7 @@
 const Cube = require('../models/Cube');
-const fs = require("fs/promises");
-const uniqid = require("uniqid");
-
-let data = {};
 
 async function init() {
-  try {
-    data = JSON.parse(await fs.readFile("./models/data.json"));
-  } catch (err) {
-    console.error("Error reading JSON file");
-  }
-
+  
   return (req, res, next) => {
     req.storage = {
       getAll,
@@ -23,19 +14,24 @@ async function init() {
 }
 
 async function getAll(query) {
-  let cubes = Cube.find({}).lean();
+  const options = {};
 
-  // if (query.search) {
-  //   cubes = cubes.filter((x) =>
-  //     x.name.toLowerCase().includes(query.search.toLowerCase())
-  //   );
-  // }
-  // if (query.from) {
-  //   cubes = cubes.filter((x) => x.difficultyLevel >= Number(query.from));
-  // }
-  // if (query.to) {
-  //   cubes = cubes.filter((x) => x.difficultyLevel <= Number(query.to));
-  // }
+  
+
+  if (query.search) {
+    options.name = {$regex: query.search, $options: 'i'};
+  }
+
+  if (query.from) {
+    options.difficultyLevel = { $gte: Number(query.from)};
+  }
+
+  if (query.to) {
+    options.difficultyLevel = options.difficultyLevel || {};
+    options.difficultyLevel.$lte = Number(query.to);
+  }
+
+  let cubes = Cube.find(options).lean();
 
   return cubes;
 }
@@ -61,7 +57,6 @@ async function edit(id, cube) {
 }
 
 async function create(cube) {
-
   const record = new Cube(cube);
   return record.save();
 }
