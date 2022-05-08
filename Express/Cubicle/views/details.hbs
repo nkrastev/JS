@@ -11,4 +11,18 @@
   <a class="btn" href="/">Back</a>
   <a class="btn" href="/edit/{{_id}}">Edit</a>
 </div>
+
+<div class="commentSection">
+    <form action="/comments/{{_id}}/create" method="post">
+      <input type="text" name="author" placeholder="Enter your name">
+      <textarea name="content">Your comment</textarea>
+      <input type="submit" value="Post comment">
+    </form>
+
+    {{#each comments}}
+    {{>comment}}
+    {{else}}
+    <p>No comments</p>
+    {{/each}}
+</div>
 {{/with}}
