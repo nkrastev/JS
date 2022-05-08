@@ -1,3 +1,4 @@
+const Cube = require('../models/Cube');
 const fs = require("fs/promises");
 const uniqid = require("uniqid");
 
@@ -22,52 +23,47 @@ async function init() {
 }
 
 async function getAll(query) {
-  let cubes = Object.entries(data).map(([id, v]) =>
-    Object.assign({}, { id }, v)
-  );
+  let cubes = Cube.find({}).lean();
 
-  if (query.search) {
-    cubes = cubes.filter((x) =>
-      x.name.toLowerCase().includes(query.search.toLowerCase())
-    );
-  }
-  if (query.from) {
-    cubes = cubes.filter((x) => x.difficultyLevel >= Number(query.from));
-  }
-  if (query.to) {
-    cubes = cubes.filter((x) => x.difficultyLevel <= Number(query.to));
-  }
+  // if (query.search) {
+  //   cubes = cubes.filter((x) =>
+  //     x.name.toLowerCase().includes(query.search.toLowerCase())
+  //   );
+  // }
+  // if (query.from) {
+  //   cubes = cubes.filter((x) => x.difficultyLevel >= Number(query.from));
+  // }
+  // if (query.to) {
+  //   cubes = cubes.filter((x) => x.difficultyLevel <= Number(query.to));
+  // }
 
   return cubes;
 }
 
 async function getById(id) {
-    const cube = data[id];
+    const cube = await Cube.findById(id).lean();
     if (cube) {
-      return Object.assign({}, { id }, cube);
+      return cube;
     } else {
       return undefined;
     }
 }
 
 async function edit(id, cube) {
-    data[id] = cube;
-    try {
-      await fs.writeFile("./models/data.json", JSON.stringify(data, null, 2));
-    } catch (err) {
-      console.error("Error writing to JSON file");
+    const existing = await Cube.findById(id);
+    if(!existing){
+      throw new ReferenceError('No such ID in database.');
     }
+
+    Object.assign(existing, cube);
+    
+    return existing.save();    
 }
 
 async function create(cube) {
-  const id = uniqid();
-  data[id] = cube;
 
-  try {
-    await fs.writeFile("./models/data.json", JSON.stringify(data, null, 2));
-  } catch (err) {
-    console.error("Error writing to JSON file");
-  }
+  const record = new Cube(cube);
+  return record.save();
 }
 
 module.exports = {
