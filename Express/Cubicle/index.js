@@ -3,7 +3,7 @@ const expressConfig = require('./config/express');
 const databaseConfig = require('./config/database');
 const routesConfig = require('./config/routes');
 
-const { init: storage} = require('./services/storage');
+const { init: storage} = require('./middlewares/storage');
 
 start();
 
