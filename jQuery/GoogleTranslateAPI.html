@@ -54,7 +54,9 @@
         <script type="text/javascript">
           $("#gtransLangSelect").change(async function () {
             let lang = this.value;
-            let textForTrasnlation = $("#textForTranslation").text();
+            
+            // API does not like html tags, removed with REGEX
+            let textForTrasnlation = $("#textForTranslation").text().replace(/<[^>]*>?/gm, '');
 
             $("#modalTranslation").modal("show");
 
