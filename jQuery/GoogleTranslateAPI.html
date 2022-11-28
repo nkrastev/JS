@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Google Translate API & Bootstrap</title>
@@ -59,8 +59,9 @@
             $("#modalTranslation").modal("show");
 
             // Post req to translate API
+            // The API key from previews commits is not valid any more, no need for tests :)
             let res = await axios.post(
-              `https://translation.googleapis.com/language/translate/v2?key=AIzaSyBV1vwUoGF7Co-JhjnHNcNmBTptVr0Dq3I`,
+              `https://translation.googleapis.com/language/translate/v2?key={API_KEY}`,
               { q: textForTrasnlation, target: lang }
             );
             let translation = res.data.data.translations[0].translatedText;
